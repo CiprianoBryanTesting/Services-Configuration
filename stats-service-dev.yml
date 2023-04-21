@@ -19,7 +19,7 @@ feign:
 resilience4j:
   retry:
     instances:
-      clients-kpi:
+      students-stats:
         max-attempts: 5
         wait-duration: 1s
         enable-exponential-backoff: true
