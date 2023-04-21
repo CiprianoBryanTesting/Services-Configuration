@@ -1,0 +1,31 @@
+server:
+  port: 8903
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://registry-service:8902/eureka/
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: student-service
+          uri: lb://student-service
+          predicates:
+            - Path=/student/**
+
+        - id: stats-service
+          uri: lb://stats-service
+          predicates:
+            - Path=/stats/**
+
+  zipkin:
+    base-url: http://zipkin-server:9411
+
+  sleuth:
+    sampler:
+      probability: 1.0
