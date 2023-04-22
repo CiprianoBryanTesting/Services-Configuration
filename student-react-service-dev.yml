@@ -1,0 +1,39 @@
+server:
+  port: 8001
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8902/eureka/
+
+spring:
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+  r2dbc:
+    url: r2dbc:h2:mem:///students_db
+    username: sa
+    password:
+
+  sleuth:
+    sampler:
+      probability: 1.0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+feign:
+  circuitbreaker:
+    enabled: false
+
+resilience4j:
+  retry:
+    instances:
+      get-all:
+        max-attempts: 5
+        wait-duration: 1s
+        enable-exponential-backoff: true
