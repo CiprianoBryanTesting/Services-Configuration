@@ -1,0 +1,36 @@
+server:
+  port: 8101
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://registry-service:8902/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+feign:
+  circuitbreaker:
+    enabled: false
+
+resilience4j:
+  retry:
+    instances:
+      students-stats:
+        max-attempts: 5
+        wait-duration: 1s
+        enable-exponential-backoff: true
+
+spring:
+  zipkin:
+    base-url: http://zipkin-server:9411
+  sleuth:
+    sampler:
+      probability: 1.0
+
+proxy:
+  student-service:
+    url:
