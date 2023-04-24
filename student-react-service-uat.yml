@@ -1,0 +1,50 @@
+server:
+  port: 8001
+
+spring:
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+  r2dbc:
+    url: r2dbc:mysql://database-server.c10gszvhmlal.us-east-1.rds.amazonaws.com:3306/students_db
+    username: root
+    password: s3cr3taws
+
+  zipkin:
+    enabled: false
+
+  sleuth:
+    sampler:
+      probability: 1.0
+
+eureka:
+  client:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+feign:
+  circuitbreaker:
+    enabled: false
+
+resilience4j:
+  retry:
+    instances:
+      get-all:
+        max-attempts: 5
+        wait-duration: 1s
+        enable-exponential-backoff: true
