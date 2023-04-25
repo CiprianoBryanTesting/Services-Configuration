@@ -7,7 +7,7 @@ spring:
       repositories:
         enabled: true
   r2dbc:
-    url: r2dbc:mysql://database-server.c10gszvhmlal.us-east-1.rds.amazonaws.com:3306/students_db
+    url: "r2dbc:${SCOTIA_DATABASE_TYPE:mysql}://${SCOTIA_DATABASE_HOST:http://localhost}:${SCOTIA_DATABASE_PORT:3306}/students_db"
     username: root
     password: s3cr3taws
 
